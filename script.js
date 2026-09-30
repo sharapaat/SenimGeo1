@@ -1493,9 +1493,21 @@ function showPage(page) {
     document.getElementById("pageTitle").textContent =
         titles[page] || "GeoSmart";
 
-    if (page === "map") {
-        setTimeout(initMainMap, 100);
-    }
+   if (page === "map") {
+
+    setTimeout(() => {
+
+        initMainMap();
+
+        if (mainMap) {
+
+            mainMap.invalidateSize();
+
+        }
+
+    }, 300);
+
+}
 
 }
 
@@ -1968,9 +1980,27 @@ function showCorrectLocation(question) {
 function initMainMap() {
 
     if (mainMap) {
-        mainMap.invalidateSize();
+        setTimeout(() => {
+            mainMap.invalidateSize();
+        }, 100);
         return;
     }
+
+    mainMap = L.map("mainMap", {
+        zoomControl: true
+    }).setView([35, 40], 3);
+
+    L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+            attribution: '&copy; OpenStreetMap contributors',
+            maxZoom: 19
+        }
+    ).addTo(mainMap);
+
+    setTimeout(() => {
+        mainMap.invalidateSize();
+    }, 300);
 
 
     mainMap = L.map("mainMap")
