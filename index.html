@@ -62,6 +62,9 @@
             <button class="nav-item" data-page="progress">
                     📈 Прогресс
             </button>
+            <button class="nav-item" data-page="ubt">
+    🎓 ҰБТ
+</button>
           
         </nav>
 
@@ -207,9 +210,20 @@
                     <p>10 тест • 10 сұрақ</p>
                     <span>Бастау →</span>
                 </div>
+
                 
 
             </div>
+            <!-- ================= MAPCHART ================= -->
+
+<div class="mapchart-card-link" onclick="window.open('https://www.mapchart.net/world.html','_blank')">
+    <div class="mapchart-icon">🗺️</div>
+    <div>
+        <h3>MapChart — Әлем картасы</h3>
+        <p>Өз картаңызды түстермен белгілеп, жүктеп алыңыз</p>
+    </div>
+    <div class="mapchart-arrow">↗</div>
+</div>
 
         <!-- ==========================================
      СЕЙСМИКАЛЫҚ БЕЛСЕНДІЛІК
@@ -392,7 +406,69 @@
     </div>
 
 </section>
+<!-- ================= ҰБТ ================= -->
 
+<section class="page" id="ubt">
+
+    <div class="section-header">
+        <div>
+            <h2>ҰБТ — Ұлттық бірыңғай тестілеу</h2>
+            <p>5 пән • 140 сұрақ • Нәтиже сақталады</p>
+        </div>
+    </div>
+
+    <!-- ОҚУШЫ АТЫ -->
+    <div class="ubt-name-card">
+        <label>Оқушының аты-жөні</label>
+        <input type="text" id="ubtStudentName" placeholder="Мысалы: Қожабаев Ермұханбек">
+        <button onclick="startUBT()">ҰБТ-ны бастау →</button>
+    </div>
+
+    <!-- ПӘНДЕР ТАҢДАУ -->
+    <div class="ubt-subjects" id="ubtSubjects" style="display:none;">
+        <div class="ubt-subject-card" onclick="openUBTSubject('kzHistory')">
+            <div class="ubt-icon">🇰🇿</div>
+            <h3>Қазақстан тарихы</h3>
+            <p>20 сұрақ</p>
+        </div>
+
+        <div class="ubt-subject-card" onclick="openUBTSubject('reading')">
+            <div class="ubt-icon">📖</div>
+            <h3>Оқу сауаттылығы</h3>
+            <p>10 сұрақ</p>
+        </div>
+
+        <div class="ubt-subject-card" onclick="openUBTSubject('math')">
+            <div class="ubt-icon">➗</div>
+            <h3>Математикалық сауаттылық</h3>
+            <p>10 сұрақ</p>
+        </div>
+
+        <div class="ubt-subject-card" onclick="openUBTSubject('geography')">
+            <div class="ubt-icon">🌍</div>
+            <h3>География</h3>
+            <p>50 сұрақ</p>
+        </div>
+
+        <div class="ubt-subject-card" onclick="openUBTSubject('worldHistory')">
+            <div class="ubt-icon">🏛️</div>
+            <h3>Дүниежүзі тарихы</h3>
+            <p>50 сұрақ</p>
+        </div>
+    </div>
+
+    <!-- НӘТИЖЕЛЕР -->
+    <div class="ubt-results" id="ubtResults">
+        <div class="ubt-results-header">
+            <h3>Тапсырған оқушылардың нәтижелері</h3>
+            <button class="ubt-clear-all" onclick="clearAllUBTResults()">
+                🗑️ Барлығын өшіру
+            </button>
+        </div>
+        <div id="ubtResultsList"></div>
+    </div>
+
+</section>
 
         <!-- ================= TESTS ================= -->
 
@@ -743,6 +819,40 @@
 
     </div>
 
+</div>
+<!-- ================= ҰБТ QUIZ MODAL ================= -->
+
+<div class="modal" id="ubtModal">
+    <div class="quiz-modal">
+
+        <button class="close-btn" onclick="closeUBT()">×</button>
+
+        <div class="quiz-top">
+            <div>
+                <span id="ubtTopic">ҰБТ</span>
+                <h2 id="ubtTitle">Пән</h2>
+            </div>
+            <div class="question-number">
+                <span id="ubtCurrent">1</span>/<span id="ubtTotal">10</span>
+            </div>
+        </div>
+
+        <div class="progress">
+            <div id="ubtProgressBar"></div>
+        </div>
+
+        <div class="question-box" style="background:#f8fafc;border-radius:15px;padding:25px;">
+            <span class="question-label">Сұрақ</span>
+            <h2 id="ubtQuestionText">Сұрақ мәтіні</h2>
+            <div class="answers" id="ubtAnswers"></div>
+            <div id="ubtAnswerResult"></div>
+
+            <button class="next-btn" id="ubtNextButton" onclick="ubtNextQuestion()" style="display:none;">
+                Келесі сұрақ →
+            </button>
+        </div>
+
+    </div>
 </div>
 
 </body>
